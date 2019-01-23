@@ -1,0 +1,34 @@
+ <% if session_user.type_id == 0%>
+<h1>Lista de coment&aacute;rios</h1>
+
+<table id="comentarios" cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="example">
+
+  <thead>
+    <tr>
+    <th>Num. chamado:</th>
+    <th>Criado Em:</th>
+    <th>T&eacute;cnico</th>
+    <th>Descri&ccedil;&atilde;o</th>
+    <th>Conte&uacute;do</th>
+
+    </tr>
+  </thead>
+  <tbody>
+  <% @comentarios.each do |comentario| %>
+   <tr>
+     <td><%=link_to comentario.chamado.id , comentario %></td>
+    <td><%= comentario.created_at.strftime("%d/%m/%Y") %></td>
+    <td><%= comentario.user.nome %></td>
+    <td><%= comentario.chamado.descricao %></td>
+    <td><%= comentario.conteudo %></td>
+   </tr>
+   <% end %>
+
+ </tbody>
+</table>
+
+<%else%>
+
+    <strong style="color: red; font-style: italic"><%= "ATENCAO!! Usuario nao tem acesso a esta pagina"%> </strong>
+
+<%end%>

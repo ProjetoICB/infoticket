@@ -1,0 +1,7 @@
+<% if session_user != nil %>
+    <h1>Novo comentario</h1>
+
+    <%= render 'form' %>
+
+    <%= link_to 'Back', comentarios_path %>
+<% end %>

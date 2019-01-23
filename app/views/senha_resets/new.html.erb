@@ -1,0 +1,26 @@
+<h1>Alterar Senha</h1>
+
+
+<strong>Preencha o campo para receber instru&ccedil;&otilde;es de como obter uma nova senha.</strong>
+
+<%= form_tag senha_resets_path, :method => :post do %>
+
+
+
+
+
+<div class="control-group">
+  <label class="control-label" for="inputIcon"> <%= label_tag :email %></label>
+  <div class="controls">
+    <div class="input-prepend">
+      <span class="add-on"><i class="icon-envelope"></i></span>
+      <input class="span2" id="inputIcon" type="text"  <%= text_field_tag :email, params[:email] %>>
+    </div>
+  </div>
+</div>
+
+<div class="actions"><%= submit_tag "Enviar" %></div>
+
+
+
+<% end %>

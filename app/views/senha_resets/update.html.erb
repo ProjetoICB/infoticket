@@ -1,0 +1,21 @@
+<%= form_for @user, :url => senha_reset_path(params[:id]) do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Opera&ccedil;&atilde;o invalida</h2>
+      <ul>
+        <% for message in @user.errors.full_messages %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :senha %>
+    <%= f.password_field :senha %>
+  </div>
+  <div class="field">
+    <%= f.label :confirmar_senha %>
+    <%= f.password_field :senha_confirmation %>
+  </div>
+  <div class="actions"><%= f.submit "Salvar nova Senha" %></div>
+<% end %>

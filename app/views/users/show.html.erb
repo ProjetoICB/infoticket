@@ -1,0 +1,52 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default =>"Usuario" %></h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
+  <dd><%= @user.nome %></dd>
+
+  <dt><strong><%= model_class.human_attribute_name(:login) %>:</strong></dt>
+  <dd><%= @user.login %></dd>
+
+
+
+  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
+  <dd><%= @user.email %></dd>
+
+  <dt><strong><%= model_class.human_attribute_name(:ramal) %>:</strong></dt>
+  <dd><%= @user.ramal %></dd>
+
+  <dt><strong><%= model_class.human_attribute_name(:departamento) %>:</strong></dt>
+  <dd><%= @user.departamento %></dd>
+
+
+
+
+
+
+
+
+  <dt><strong><%= model_class.human_attribute_name(:sobrenome) %>:</strong></dt>
+  <dd><%= @user.sobrenome %></dd>
+
+  <dt><strong> Numero USP:</strong></dt>
+  <dd><%= @user.n_usp %></dd>
+</dl>
+
+<div class="form-actions">
+  <% if (session_user == nil) %>
+
+
+      <a class="btn btn-primary"<%= link_to 'Logar-se', :controller => "login", :action => "login" %> </a>
+
+<% end %>
+
+
+
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_user_path(@user), :class => 'btn' %>
+
+
+</div>

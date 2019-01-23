@@ -1,0 +1,205 @@
+<% if session_user != nil %>
+    <h1>Gr&aacute;ficos</h1>
+
+    <script src="http://code.highcharts.com/stock/highstock.js"></script>
+    <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+
+    <script type="text/javascript"  charset="utf-8">
+
+
+      $(function() {
+
+
+            // create the chart
+            chart = new Highcharts.StockChart({
+                chart: {
+                    renderTo: 'chamados2',
+                    alignTicks: false
+                },
+
+                rangeSelector: {
+                    selected: 1
+                },
+
+                title: {
+                    text: 'Total de Chamados'
+                },
+
+                series: [{
+                    type: 'area',
+
+                    name: 'Chamados',
+                    pointInterval: <%= 1.day * 1000%>,
+                    pointStart: <%= 3.years.ago.at_midnight.to_i * 1000 %>,
+                    data:<%=(3.years.ago.at_midnight.to_date..Date.today+5).map {|date| Chamado.total_on(date)}.inspect %>
+
+
+                         }]
+
+
+
+
+               });
+          });
+
+
+
+
+           </script>
+
+
+
+    <table class="offset3" id="chamados2" style="width: 1250px; height: 300px; padding: 0px 0px 0px 2px;">
+
+
+    <% @chamado.each do |c| %>
+      <tr>
+        <td><%= c.id %></td>
+                  <td><%= c.created_at.strftime("%d %b. %Y") %></td>
+                  <td><%= c.predio %></td>
+                  <td><%= c.status %></td>
+
+      </tr>
+    <% end %>
+    </table>
+
+
+
+
+    <script type="text/javascript">
+
+
+        $(function () {
+            var chart;
+            $(document).ready(function() {
+
+                new Highcharts.Chart({
+
+                    chart:{
+
+                        renderTo: "chamados_chart",
+                        type: "column"
+
+
+
+                    },
+                    title: {
+                        text: "Chamados do ano atual"
+                    },
+                    xAxis: [{
+                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                    }],
+                    yAxis:{
+                        title: {
+                            text: "Quantidade"
+                        }
+                    },
+                    tooltip: {
+                        formatter: function () {
+                            return  this.x + ': ' +
+                                    this.y + " chamados ";
+                        }
+                    },
+
+                    plotOptions: {
+                        columnrange: {
+                            dataLabels: {
+                                enabled: true,
+                                formatter: function () {
+                                    return this.y + '';
+                                },
+                                y: 0
+                            }
+                        }
+                    },
+
+                    series: [{
+                        name: "ICB I" ,
+
+                        data: <%=(1..12).map {|date| Chamado.total_geral(date, "ICB I")}.inspect %>  <!-- mapeia do mes 1 ao 12 e traz os valores da def total geral com -->
+
+                    },
+
+                        {
+                            name: "ICB II" ,
+
+                            data: <%=(1..12).map {|date| Chamado.total_geral(date, "ICB II")}.inspect %> <!-- mapeia do mes 1 ao 12 e traz os valores da def total geral com -->
+
+                        },
+                        {
+                            name: "ICB III" ,
+
+                            data: <%=(1..12).map {|date| Chamado.total_geral(date, "ICB III")}.inspect %> <!-- mapeia do mes 1 ao 12 e traz os valores da def total geral com -->
+
+                        },
+                        {
+                            name: "ICB IV" ,
+
+                            data: <%=(1..12).map {|date| Chamado.total_geral(date, "ICB IV")}.inspect %> <!-- mapeia do mes 1 ao 12 e traz os valores da def total geral com -->
+
+                        },
+                        {
+                            name: "Outros" ,
+
+                            data: <%=(1..12).map {|date| Chamado.total_geral(date, "Outro")}.inspect %>    <!-- mapeia do mes 1 ao 12 e traz os valores da def total geral com -->
+
+                        }]
+                });
+
+
+            });
+        });
+    </script>
+
+
+    <div class="offset3" id="chamados_chart" style="width: 1250px; height: 300px; padding: 0px 0px 0px 6px;"></div>      <!-- Define o tamanho do grafico -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table  table-bordered table-hover">
+      <thead>
+      <tr>
+        &nbsp;
+        <th> ICB I chamados </th>
+        <th>ICB II chamados:</th>
+        <th>ICB III chamados:</th>
+        <th>ICB IV chamados:</th>
+        <th>Outro chamados:</th>
+        <th>Total de chamados:</th>
+
+      </tr>
+
+      </thead>
+
+
+      <tbody>
+
+      <tr>                            <!-- Da forma a tabela -->
+
+        <td><%= Chamado.count( :conditions => ["predio = 'ICB I'"] ) %></td>
+        <td><%= Chamado.count( :conditions => ["predio = 'ICB II'"] ) %></td>
+        <td><%= Chamado.count( :conditions => ["predio = 'ICB III'"] ) %></td>
+        <td><%= Chamado.count( :conditions => ["predio = 'ICB IV'"] ) %></td>
+        <td><%= Chamado.count( :conditions => ["predio = 'Outro'"] ) %></td>
+        <td><%= Chamado.count%></td>
+
+      </tr>
+
+
+      </tbody>
+
+
+    </table>
+<% end %>

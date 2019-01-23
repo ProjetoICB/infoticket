@@ -1,0 +1,21 @@
+<% if session_user != nil %>
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <b>Tecnico:</b>
+      <%= @comentario.chamado.tecnico %>
+    </p>
+
+    <p>
+      <b>Conteudo:</b>
+      <%= @comentario.conteudo %>
+    </p>
+
+    <p>
+      <b>Chamados:</b>
+      <%= @comentario.chamado.descricao %>
+    </p>
+
+
+    <%= link_to 'Voltar', comentarios_path %>
+<% end %>

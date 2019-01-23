@@ -1,0 +1,12 @@
+<% if session_user != nil %>
+    <%= form_tag(chamados_path, :method => "get") do %>
+    <%= label_tag(:with_id, "Numero do chamado:") %>
+    <%=text_field_tag :with_id  %>
+    <%= label_tag :with_status, "Status:"  %>
+    <%=text_field_tag :with_status  %>
+
+    <!--< %= label_tag(:with_nome, "nome:") %>
+    < %=text_field_tag :with_nome  %>-->
+     <%= submit_tag "Search" %>
+    <%end%>
+<% end %>

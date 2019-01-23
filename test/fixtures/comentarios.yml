@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  tecnico: MyString
+  conteudo: MyText
+  chamados: 
+
+two:
+  tecnico: MyString
+  conteudo: MyText
+  chamados: 

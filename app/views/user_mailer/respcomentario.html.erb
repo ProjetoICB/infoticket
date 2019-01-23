@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html, utf-8"  http-equiv="Content-Type" />    <!--utf-8 erro-->
+</head>
+<body>
+<h1>Infoticket - Comentário do Técnico</h1>
+
+<p> Olá! O chamado com o título <strong><%=@chamado.titulo%></strong> e com a ID: <strong><%=@chamado.id%></strong>  tem o seguinte comentário do técnico <strong><%= @chamado.tecnico %> </strong> :</p>
+
+<% @chamado.comentarios.order('created_at desc').limit(1).each do |coment| %>
+    <p> <%=  coment.conteudo %> </p>
+<% end %>
+
+</body>
+</html>

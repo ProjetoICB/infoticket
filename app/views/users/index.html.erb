@@ -1,0 +1,60 @@
+<% if session_user != nil %>
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => t("Lista de usuarios") %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:login) %></th>
+      <!--<th>< %= model_class.human_attribute_name(:senha) %></th>-->
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:ramal) %></th>
+      <th><%= model_class.human_attribute_name(:departamento) %></th>
+     <!-- <th>< %= model_class.human_attribute_name(:auth_token) %></th>
+      <th>< %= model_class.human_attribute_name(:senha_reset_token) %></th>
+      <th>< %= model_class.human_attribute_name(:senha_reset_sent_at) %></th>
+      <th>< %= model_class.human_attribute_name(:type_id) %></th> -->
+      <th><%= model_class.human_attribute_name(:sobrenome) %></th>
+      <th><%= model_class.human_attribute_name(:n_usp) %></th>
+      <!--<th>< %= model_class.human_attribute_name(:created_at) %></th>
+      <th>< %= %></th>-->
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= link_to user.id, user_path(user) %></td>
+        <td><%= user.nome %></td>
+        <td><%= user.login %></td>
+       <!-- <td>< %= user.senha %></td>  -->
+        <td><%= user.email %></td>
+        <td><%= user.ramal %></td>
+        <td><%= user.departamento %></td>
+      <!--  <td>< %= user.auth_token %></td>
+        <td>< %= user.senha_reset_token %></td>
+        <td>< %= user.senha_reset_sent_at %></td>
+        <td>< %= user.type_id %></td>          -->
+        <td><%= user.sobrenome %></td>
+        <td><%= user.n_usp %></td>
+        <!--<td>< %= user.created_at %></td>  -->
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.editar")),
+                      edit_user_path(user), :class => 'btn btn-mini' %>
+        <!-- < % = link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      user_path(user),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>  -->
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.novo")),
+            new_user_path,
+            :class => 'btn btn-primary' %>
+<% end %>

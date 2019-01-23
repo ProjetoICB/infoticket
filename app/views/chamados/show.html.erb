@@ -1,0 +1,121 @@
+<% if session_user != nil %>
+    <p id="notice">Chamado foi criado com sucesso! <%= notice %></p>
+
+    <p>
+      <b>T&iacute;tulo:</b>
+      <%= @chamado.titulo %>
+    </p>
+
+    <p>
+      <b>Descri&ccedil;&atilde;o:</b>
+      <%= @chamado.descricao %>
+    </p>
+
+    <p>
+      <b>Status:</b>
+      <%= @chamado.status %>
+    </p>
+
+    <p>
+      <b>Usu&aacute;rio:</b>
+      <%= @chamado.user.nome %>
+    </p>
+
+    <p>
+      <b>Ramal:</b>
+      <%= @chamado.user.ramal %>
+    </p>
+    <p>
+
+    <p>
+      <b>email:</b>
+      <%= @chamado.user.email %>
+    </p>
+
+    <p>
+      <b>Departamento:</b>
+      <%= @chamado.user.departamento %>
+    </p>
+
+    <p>
+      <b>Local:</b>
+      <%= @chamado.sala %>
+    </p>
+
+    <p>
+      <b>Pr&eacute;dio:</b>
+      <%= @chamado.predio %>
+    </p>
+
+    <p>
+      <b>Patrimonio:</b>
+      <%= @chamado.patrimonio  %>
+    </p>
+
+    <p>
+      <b>T&eacute;cnico:</b>
+      <%= @chamado.tecnico  %>
+    </p>
+
+    <p>
+      <b>Observa&ccedil;&atilde;o:</b>
+      <%= @chamado.obs  %>
+    </p>
+
+    <p>
+      <b>Criado em:</b>
+      <%= @chamado.created_at.strftime("%d/%m/%Y - %H:%M") %>
+    </p>
+
+    <h1>Coment&aacute;rios</h1>
+
+    <% @chamado.comentarios.each do |comentario| %>
+        <p>
+          <b>T&eacute;cnico:</b>
+          <%= comentario.user.nome %>
+        </p>
+
+        <p>
+          <b>Coment&aacute;rio:</b>
+          <%= comentario.conteudo %>
+        </p>
+
+        <p>
+          <b> Mandar comentário ao solcitante? </b>
+          <%= comentario.respPorEmail == true ? "Sim" : "Não" %>
+        </p>
+
+        <p>
+          <b>Coment&aacute;rio adicionado em:</b>
+          <%= comentario.created_at.strftime("%d/%m/%Y - %H:%M") %>
+        </p>
+
+        <hr />
+    <%end%>
+
+    <% if(session_user.type_id ==0 ) %> <!-- Se o usuario logado for user adm aparecera os campos para preenchimento -->
+        <h3>Adicione um comentario:</h3>
+        <%= form_for([@chamado, @chamado.comentarios.build]) do |f| %>
+            <div class="field">
+              <%= f.label :tecnico %>
+              <strong><%= session_user.nome %></strong>         <!-- Automaticamente o campo de nome do tecnico eh preenchido -->
+
+            </div>
+            <div class="field">
+              <%= f.label :conteudo %><br />
+              <%= f.text_area :conteudo , :size => "30x10" %>
+            </div>
+            <div class="field">
+              <%= f.check_box :respPorEmail %> Mandar esse comentario para o e-mail do solicitante
+            </div>
+
+            <br>
+            <div class="actions">
+              <%= f.submit "Criar comentario" %>
+            </div>
+        <% end %>
+
+    <% end %>
+
+    <br />
+<% end %>

@@ -1,0 +1,138 @@
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+
+
+
+
+
+</head>
+ <body>
+
+
+
+
+
+
+<%= form_tag :action => "login" %>
+
+<div class="container">
+  <div class="row-fluid">
+
+    <div class="span5">
+
+      <h1>Quadro de Avisos:</h1>
+
+      <table>
+        <tr>
+
+
+        </tr>
+
+        <% @aviso.each do |aviso| %>              <!-- Mostra o ultimo aviso criado -->
+            <tr>
+              <td><h4 style="color:red;"><%= aviso.quadro_de_avisos %><h4></td>
+            </tr>
+        <% end %>
+      </table>
+
+    </div>
+
+
+
+    <div class="span4 offset2 ">
+
+      <div class="well">
+
+        <form>
+          <fieldset>
+
+            <legend>Bem vindo!</legend>
+
+            <h5>Preencha login e senha para efetuar o acesso</h5>
+
+            <% if flash[:notice] %>
+                <flash><p style="color: red; font-style: italic"><%= flash[:notice] %></p></flash>
+            <% end %>
+
+
+
+            <div class="control-group">
+              <label class="control-label" for="inputIcon" ></label>
+              <div class="controls">
+                <div class="input-prepend  input-xlarge">
+                  <span class="add-on"><i class="icon-user"></i></span>
+                  <input class="input-block-level"  id="inputIcon" type="text" placeholder="login..."  <%= text_field "login", params[:login] %>>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="control-group">
+              <label class="control-label" for="inputIcon2" ></label>
+              <div class="controls">
+                <div class="input-prepend input-xlarge">
+                  <span class="add-on"><i class="icon-lock"></i></span>
+                  <input class="input-block-level"  id="inputIcon2" type="password" placeholder="senha..."  <%= password_field_tag  "senha" %>>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+            <input type="submit" class="btn btn-primary" value="Acessar">
+            <a class="btn btn-info"<%= link_to 'Registre-se', :controller => "users", :action => "new" %> </a>
+            <a class="btn btn-invert" <%= link_to  'Esqueci a senha ', :controller => "senha_resets", :action => "new" %> </a>
+
+
+
+
+          </fieldset>
+
+        </form>
+
+
+
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+ </body>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+</head>
+<body>
+
+<script type="text/javascript">
+    $(function () {
+        $(".controls").popover(
+                {
+                    placement: 'right'
+                }
+        );
+    });
+</script>
+
+<div class="row">
+
+  <%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+
+      <div class="span5">
+
+        <div class="control-group">
+          <%= f.label :nome, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :nome, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :sobrenome, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :sobrenome, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :login, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :login, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <% if @user.nome == nil || session[:user] == nil %>   <!--Para usuarios nao vejam a senha e para corrigir a senha caso tenha algum erro no cadastro  -->
+
+            <div class="control-group">
+              <%= f.label :senha,  :class => 'control-label' %>
+              <div class="controls">
+                <%= f.password_field :senha %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <%= f.label :confirmar ,  :class => 'control-label' %>
+
+              <div class="controls">
+                <%= f.password_field :senha_confirmation %>
+              </div>
+            </div>
+
+        <% end %>
+
+
+        <div class="control-group">
+
+          <%= f.label :email, :class => 'control-label' %>
+
+          <div class="controls" data-content="Preferencialmente favor cadastrar um email da USP ou ICB">
+            <%= f.text_field :email, :class => 'text_field' %>
+          </div>
+
+
+        </div>
+
+
+        <div class="control-group">
+          <%= f.label :ramal, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :ramal, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :numero_usp, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.text_field :n_usp, :class => 'text_field' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :departamento, :class => 'control-label' %>
+          <div class="controls">
+            <%= f.select :departamento,([['Academico'],['Administracao'],['Financeiro'],['Anatomia'],['Biologia Celular'],
+                                         ['Farmacologia'],['Fisiologia'], ['Imunologia'],['Microbiologia'],
+                                         ['Parasitologia'],['Biblioteca'],['Biotecnologia'],['Diretoria'],
+                                         ['Bioterio'],['Informatica']]) %>
+          </div>
+        </div>
+
+        <%  if @user == nil || session_user == nil%>          <!-- ao fazer cadastro usuario soh verah uma opcao -->
+            <div class="control-group">
+
+              <%= f.label :usuario, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :type_id, ([["Simples" , 1]]) %>
+
+              </div>
+            </div>
+
+        <% elsif @user.type_id == 0 || session_user.type_id == 0 %>     <!--caso o usuario for administrador verah duas opcoes -->
+            <div class="control-group">
+
+              <%= f.label :usuario, :class => 'control-label' %>
+              <div class="controls">
+
+                <%= f.select :type_id, ([["Simples", 1]  , ["Admin", 0]])  %>
+
+              </div>
+            </div>
+
+        <%end%>
+
+      </div>
+
+      <% if @user.errors.any? %>
+
+          <div class="alert alert-error span9 offset4">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "erro") %> : A solicita&ccedil;&atilde;o de usuário n&atilde;o pode ser salva:</h2>
+
+              <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+
+      <% end %>
+
+      </div>
+
+      <div class="form-actions">
+        <div class="offset1">
+          <%= f.submit "Confirmar", :class => 'btn btn-primary' %>
+          <!--  < %= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                        users_path, :class => 'btn' %>     -->
+        </div>
+      </div>
+
+
+  <% end %>
+
+  </body>
+</html>
+
+
+

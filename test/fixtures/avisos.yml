@@ -1,0 +1,7 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  quadro_de_avisos: MyText
+
+two:
+  quadro_de_avisos: MyText

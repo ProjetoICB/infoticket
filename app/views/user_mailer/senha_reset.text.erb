@@ -1,0 +1,8 @@
+Olá <%= @user.nome.force_encoding("UTF-8") %>
+
+Para acessar o sistema utilize o login: <%= @user.login %> 
+
+Para resetar a senha você precisa acessar este endereço: <%= edit_senha_reset_url(@user.senha_reset_token) %>,
+se você não deseja trocar seus dados por favor ignore este email.
+
+Obrigado por utilizar este sistema!

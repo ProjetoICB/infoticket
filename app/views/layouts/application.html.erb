@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+<head>
+  <!--<meta charset="utf-8" />-->
+
+  <title>Sistema de chamados-ICB/USPt</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+
+
+
+
+<body>
+
+
+<div class="navbar navbar-top navbar-inverse">
+  <div class="navbar-inner" >
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse" >
+
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand" href="#">Infoticket</a>
+      <div class="nav-collapse">
+        <ul class="nav">
+
+          <% if session_user %>
+
+                <li><%= link_to "Editar perfil", :controller => "users", :action => "edit", :id => session_user.id %></li> <!--O usuario logado pode alterar somente o proprio perfil -->
+                <% if session_user != nil %>
+                    <li><%= link_to  'Chamados', :controller => "chamados", :action => "index" %></li>
+                <% end %>
+                <% if session_user.type_id == 0 %>    <!--Se o usuario for Tecnico verah estas opcoes de link -->
+                    <li><%= link_to 'Usuarios', :controller => "users" , :action => "index" %></li>
+                    <li><%= link_to 'Novo aviso', new_aviso_path %></li>
+                    <li><%= link_to 'Comentarios', :controller => "comentarios" , :action => "index" %></li>
+                    <li><%= link_to 'Relatorio', :controller => "chamados", :action => "relatorio" %></li>
+                <% end %>
+                <li><%= link_to "Log out", :controller => "login", :action => "logout" %>  </li>
+
+
+
+
+          <% end %>
+
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+<%= yield %>
+</div>
+</body>
+</html>
+
+
+
