@@ -50,15 +50,60 @@ ActiveRecord::Schema.define(:version => 20190122170314) do
   add_index "comentarios", ["chamado_id"], :name => "index_comentarios_on_chamado_id"
   add_index "comentarios", ["chamados_id"], :name => "index_comentarios_on_chamados_id"
 
+  create_table "logs", :force => true do |t|
+    t.string   "acao"
+    t.string   "ip"
+    t.integer  "usuario_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "perfils", :force => true do |t|
+    t.string   "tipo"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "permitidos", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "perfil_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "sessions", :force => true do |t|
+    t.string   "session_id"
+    t.text     "data"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "sessions_old", :force => true do |t|
     t.string   "session_id", :default => "", :null => false
     t.text     "data"
     t.datetime "created_at",                 :null => false
     t.datetime "updated_at",                 :null => false
   end
 
-  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
-  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
+  add_index "sessions_old", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions_old", ["updated_at"], :name => "index_sessions_on_updated_at"
+
+  create_table "tipo_vinculos", :force => true do |t|
+    t.string   "tipoVinculo"
+    t.string   "codigoSetor"
+    t.string   "nomeAbreviadSetor"
+    t.string   "nomeSetor"
+    t.string   "codigoUnidade"
+    t.string   "siglaUnidade"
+    t.string   "nomeUnidade"
+    t.string   "nomeVinculo"
+    t.string   "nomeAbreviadoFuncao"
+    t.integer  "usuario_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "nome"
@@ -75,6 +120,19 @@ ActiveRecord::Schema.define(:version => 20190122170314) do
     t.integer  "type_id"
     t.string   "sobrenome"
     t.string   "n_usp"
+  end
+
+  create_table "usuarios", :force => true do |t|
+    t.string   "nomeUsuario"
+    t.string   "loginUsuario"
+    t.string   "tipoUsuario"
+    t.string   "emailPrincipalUsuario"
+    t.string   "emailAlternativoUsuario"
+    t.string   "emailUspUsuario"
+    t.string   "numeroTelefoneFormatado"
+    t.string   "ramalUsp"
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
 end

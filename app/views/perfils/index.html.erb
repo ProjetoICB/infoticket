@@ -1,0 +1,55 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#perfil').dataTable ({
+            "iDisplayLength": 10, <!-- 10 registros por pagina -->
+            "bPaginate": true,    <!-- Paginação  -->
+            "sPaginationType":"full_numbers",   <!-- Opção de mostrar numeros por pagina (1,2,3...) -->
+            "bJQueryUI":true,
+            "bLengthChange":false, <!-- Tira a opção de escolher quantos registros devem aoarecer por paagina -->
+            "ordering":     false,  <!-- Tira os links de ordenação de cada coluna -->
+            "aaSorting":    [],  <!-- Determina que a ordenação nao seguira nenhuma coluna (por estar vazio). -->
+            "oLanguage": { <!-- Inicia a tradução dos itens da tela -->
+                "sInfo":              "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoFiltered":      "Filtrado de _MAX_ registros no total",
+                "sInfoEmpty":         "Sem resultados",
+                "sZeroRecords":       "Sem resultados",
+                "sSearch":            "Buscar",
+                "oPaginate": {
+                    "sFirst":         "Primeiro",
+                    "sPrevious":      "Anterior",
+                    "sNext":          "Próximo",
+                    "sLast":          "Ultimo"
+                }
+            }
+        })
+    })
+</script>
+
+
+
+
+<h1>Perfis</h1>
+
+<table class="table table-bordered display" id="perfil">
+  <thead>
+    <tr>
+      <th class="text-center">Tipo</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @perfils.each do |perfil| %>
+      <tr>
+        <td><%= perfil.tipo %></td>
+        <td class="text-center"><%= link_to 'Mostrar', perfil, class: "btn btn-default" %></td>
+        <td class="text-center"><%= link_to 'Editar', edit_perfil_path(perfil), class: "btn btn-primary active" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Novo Perfil', new_perfil_path, class: "btn btn-primary active" %>

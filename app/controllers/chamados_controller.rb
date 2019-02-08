@@ -3,6 +3,8 @@ class ChamadosController < ApplicationController
   # GET /chamados.json
 require 'will_paginate/array'   #necessario para gem funcionar
 
+ before_filter :usuario_autenticado?
+=begin
 def resumopp
 
   @chamados = Chamado.find(:all , :conditions => {:status => ["Em atendimento","Encaminhado"] })
@@ -29,7 +31,15 @@ def relatorio
   @chamado = Chamado.find(:all)   # def para o funcionameto dos graficos
 end
 
-  def index
+=end
+
+def index
+ @chamados = Chamado.order('id desc')
+
+
+
+
+=begin
 
     @user = User.find(:first, :conditions => {:id => session[:user]})
 
@@ -44,11 +54,31 @@ end
 
     end
 
+=end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @chamados }
     end
+end
+
+
+  def indexOld
+    @chamados = Chamado.order('id desc')
+    @user = User.find(:first, :conditions => {:id => session[:user]})
+    if @user.type_id == 1  #type_id iras servir para diferenciar usuarios de adms
+      @chamados = Chamado.find(:all, :conditions => { :user_id => session[:user] })  # somente os chamados do usuario logado podera ser visto
+    elsif @user.type_id == 0
+      @chamados = Chamado.all       # o TECNICO poderah ver todos os chamados criados
+    end
   end
+
+
+
+
+
+
+
 
   # GET /chamados/1
   # GET /chamados/1.json
@@ -66,7 +96,6 @@ end
   def new
 
      @chamado = Chamado.new
-    # @user = User.find(:first, :conditions => {:id => session[:user]} )
 
     respond_to do |format|
       format.html # new.html.erb
@@ -85,11 +114,13 @@ end
   def create
 
     @chamado = Chamado.new(params[:chamado])
-    @chamado.user_id = session[:user]    #preenche automaticamente o  campo user_id com o usuario logado
+   # @chamado.user_id = session[:user]    #preenche automaticamente o  campo user_id com o usuario logado
+    @chamado.user_id = session[:login]
 
     respond_to do |format|
       if @chamado.save
-     UserMailer.chamados_new(@chamado).deliver     # envia uma mensagem para o usuario que criou o chamado
+          #corrigir essa linha de baixo
+          #UserMailer.chamados_new(@chamado).deliver     # envia uma mensagem para o usuario que criou o chamado
 
         format.html { redirect_to @chamado, notice: 'Voce vai receber um email informando para qual tecnico foi encaminhado.' }
         format.json { render json: @chamado, status: :created, location: @chamado }
@@ -113,9 +144,9 @@ end
           format.html { render action: "edit" }
           format.json { render json: @chamado.errors, status: :unprocessable_entity }
         else
-          UserMailer.chamados_update(@chamado).deliver #alterado 31/03/2015
-          UserMailer.chamados_atender(@chamado).deliver
-          format.html { redirect_to @chamado, notice: 'Chamado foi atualizado com successo.' }
+          #UserMailer.chamados_update(@chamado).deliver #alterado 31/03/2015
+          #UserMailer.chamados_atender(@chamado).deliver
+            format.html { redirect_to @chamado, notice: 'Chamado foi atualizado com successo.' }
           format.json { head :no_content }
         end
       else

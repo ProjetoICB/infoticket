@@ -71,6 +71,7 @@ GEM
     mime-types (1.25.1)
     multi_json (1.13.1)
     mysql2 (0.3.18)
+    oauth (0.5.1)
     polyglot (0.3.5)
     rack (1.4.7)
     rack-cache (1.7.1)
@@ -103,6 +104,7 @@ GEM
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    senhaunica (1.0.5)
     sprockets (2.2.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -137,8 +139,10 @@ DEPENDENCIES
   jquery-ui-rails
   less-rails
   mysql2 (= 0.3.18)
+  oauth
   rails (= 3.2.12)
   sass-rails (~> 3.2.3)
+  senhaunica
   therubyracer
   twitter-bootstrap-rails (= 2.2.8)
   uglifier (>= 1.0.3)

@@ -2,21 +2,24 @@ Suporte2::Application.routes.draw do
 
 
 
+  get 'welcome/login'
+  get 'welcome/callback'
+  get 'logout' => 'welcome#destroy', as: 'logout'
+  get 'indexOld' => 'chamados#indexOld' , as: 'chamados_antigos'
 
 
+  resources :usuarios
+  resources :permitidos
+  resources :perfils
+  resources :logs
   resources :avisos
   resources :senha_resets
   resources :comentarios
-
-
+  resources :users
   resources :chamados do #necessario para mostrar os comentarios no show dos chamados
-
-
    # collection  do
       #get :relatorio
       #get :resumo
-
-
     resources :comentarios
 
    # end
@@ -25,14 +28,11 @@ Suporte2::Application.routes.draw do
   match 'resumo' => "chamados#resumo"
   match 'resumopp' => "chamados#resumopp"
 
+  #root :to => "login#login"
+  root :to => 'welcome#login'
 
-  resources :users
-
-
-
-  root :to => "login#login"
-  get "login/logout"
-  get "logout/login"
+  #get "login/logout"
+  #get "logout/login"
 
 
 

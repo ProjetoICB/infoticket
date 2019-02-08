@@ -34,27 +34,20 @@
       <a class="brand" href="#">Infoticket</a>
       <div class="nav-collapse">
         <ul class="nav">
-
-          <% if session_user %>
-
-                <li><%= link_to "Editar perfil", :controller => "users", :action => "edit", :id => session_user.id %></li> <!--O usuario logado pode alterar somente o proprio perfil -->
-                <% if session_user != nil %>
-                    <li><%= link_to  'Chamados', :controller => "chamados", :action => "index" %></li>
-                <% end %>
-                <% if session_user.type_id == 0 %>    <!--Se o usuario for Tecnico verah estas opcoes de link -->
-                    <li><%= link_to 'Usuarios', :controller => "users" , :action => "index" %></li>
+          <% if session[:perfil].include? "Comum" %>
+              <li> <%= link_to  'Chamados', chamados_path %></li>
+          <% elsif session[:perfil].include? "Administrador" %>
+                    <li><%= link_to  'Chamados', chamados_path %></li>
+                    <!-- <li> < %= link_to 'Usuarios', :controller => "users" , :action => "index" %></li> -->
+                    <li> <%= link_to 'Usuarios', usuarios_path %> </li>
                     <li><%= link_to 'Novo aviso', new_aviso_path %></li>
                     <li><%= link_to 'Comentarios', :controller => "comentarios" , :action => "index" %></li>
                     <li><%= link_to 'Relatorio', :controller => "chamados", :action => "relatorio" %></li>
-                <% end %>
-                <li><%= link_to "Log out", :controller => "login", :action => "logout" %>  </li>
-
-
-
-
+                    <li><%= link_to 'Logs', logs_path %> </li>
+                    <li><%= link_to 'Perfis', perfils_path %> </li>
+                    <li><%= link_to 'Permitidos', permitidos_path %>  </li>
           <% end %>
-
-
+          <li><%= link_to "Log out", logout_path %>  </li>
         </ul>
       </div>
     </div>

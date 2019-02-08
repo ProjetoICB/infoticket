@@ -26,122 +26,82 @@
 </script>
 
 <div class="row">
-
   <div class="span5">
-
-
-<% if session_user != nil %>
-
-    <%= form_for @chamado, :html => { :class => 'form-horizontal' } do |f| %>
-
+    <% if session[:login] != nil %>
+        <%= form_for @chamado, :html => { :class => 'form-horizontal' } do |f| %>
           <div class="control-group">
-
-
             <%= f.label :titulo, :class => 'control-label' %>
-
                 <div class="controls" data-content="Resumo do atendimento de chamado. Ex. Problema com Email">
-
                   <%= f.text_field :titulo, :class => 'text_field' %>
-
                 </div>
            </div>
-
-      <div class="control-group">
-
-          <%= f.label :descricao, :class => 'control-label' %>
-        <div class="controls"  data-content="Descreva o que esta acontecendo. Ex. Thunderbird exibe
-                                         a seguinte mensagem de erro (Impossivel encontrar o servidor de email)">
-
-
-        <%= f.text_area :descricao, :class => 'text_area' , :size => "30x10" %>
-
-        </div>
-
-      </div>
-
-        <% if session_user.type_id == 0 %>
+            <div class="control-group">
+              <%= f.label :descricao, :class => 'control-label' %>
+              <div class="controls"  data-content="Descreva o que esta acontecendo. Ex. Thunderbird exibe a seguinte mensagem de erro (Impossivel encontrar o servidor de email)">
+                <%= f.text_area :descricao, :class => 'text_area' , :size => "30x10" %>
+              </div>
+            </div>
+            <% if session[:perfil].include? "Administrador" %>
+                <div class="control-group">
+                  <%= f.label :status, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= f.select :status, (["Aguardando atendimento", "Em atendimento", "Finalizado", "Encaminhado"])  %>
+                  </div>
+                </div>
+            <% elsif session[:perfil].include? "Comum" %>
+                <div class="control-group">
+                  <%= f.label :status, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= f.select :status, (["Aguardando atendimento"])  %>
+                  </div>
+                </div>
+            <% end %>
 
             <div class="control-group">
-        <%= f.label :status, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.select :status, (["Aguardando atendimento", "Em atendimento", "Finalizado", "Encaminhado"])  %>
-        </div>
-      </div>
-
-        <% elsif session_user.type_id == 1 %>
-
-            <div class="control-group">
-              <%= f.label :status, :class => 'control-label' %>
+              <%= f.label :predio, :class => 'control-label' %>
               <div class="controls">
-                <%= f.select :status, (["Aguardando atendimento"])  %>
+                <%= f.select :predio, ([['ICB I'],['ICB II'],['ICB III'],['ICB IV'],['Outro']])%>
               </div>
             </div>
 
-
-        <%end%>
-
-
-
-        <div class="control-group">
-          <%= f.label :predio, :class => 'control-label' %>
-          <div class="controls">
-            <%= f.select :predio, ([['ICB I'],['ICB II'],['ICB III'],['ICB IV'],['Outro']])%>
-
-
-          </div>
-        </div>
-
-
-
             <div class="control-group">
-        <%= f.label :Local, :class => 'control-label' %>
+              <%= f.label :Local, :class => 'control-label' %>
               <div class="controls"  data-content="Sala, complemento, numero, etc...">
-          <%= f.text_field :sala, :class => 'text_field' %>
-        </div>
-      </div>
+                <%= f.text_field :sala, :class => 'text_field' %>
+              </div>
+            </div>
 
-
-
-
-        <% if session_user.type_id == 0 %>
-
-            <div class="control-group">
-        <%= f.label :tecnico, :class => 'control-label' %>
-        <div class="controls">
-          <%= f.text_field :tecnico, :class => 'text_field' %><div class="av_doc"></div>
-        </div>
-      </div>
-
-
+            <% if session[:perfil].include? "Administrador" %>
+                <div class="control-group">
+                  <%= f.label :tecnico, :class => 'control-label' %>
+                  <div class="controls">
+                    <%= f.text_field :tecnico, :class => 'text_field' %><div class="av_doc"></div>
+                  </div>
+                </div>
                 <div class="control-group">
                   <%= f.label :obs, "Obs.", :class => 'control-label' %>
                   <div class="controls">
                     <%= f.text_field :obs,  :class => 'text_area' , :size => "30x10" %>
                   </div>
                 </div>
+            <% end %>
 
-        <%end%>
-
-      <div class="control-group">
-        <%= f.label :numero_de_patrimonio, :class => 'control-label' %>
-        <div class="controls"  data-content="Coloque o numero do patrimonio da maquina. Ex. 042.XXXXX">
-          <%= f.text_field :patrimonio, :class => 'text_field' %>
-        </div>
-      </div>
-
-          </div>
-
-          </div>
+            <div class="control-group">
+              <%= f.label :numero_de_patrimonio, :class => 'control-label' %>
+              <div class="controls"  data-content="Coloque o numero do patrimonio da maquina. Ex. 042.XXXXX">
+                <%= f.text_field :patrimonio, :class => 'text_field' %>
+              </div>
+            </div>
+            </div>
+            </div>
 
             <div class="form-actions">
-        <div class=" offset1">
-        <%= f.submit "Confirmar", :class => 'btn btn-primary' %>
-        <%= link_to ("Cancelar"),chamados_path, :class => 'btn' %>
-        </div>
-      </div>
+              <div class=" offset1">
+                <%= f.submit "Confirmar", :class => 'btn btn-primary' %>
+                <%= link_to ("Cancelar"),chamados_path, :class => 'btn' %>
+              </div>
+            </div>
+        <% end %>
     <% end %>
-
-<% end %>
-
     </body>
 </html>

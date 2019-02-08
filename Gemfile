@@ -36,6 +36,12 @@ gem 'jquery-rails'
 gem 'therubyracer'
 gem 'less-rails'
 
+
+#senha unica
+gem 'senhaunica'
+gem 'oauth'
+
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
