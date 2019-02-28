@@ -25,7 +25,11 @@ class UserMailer < ActionMailer::Base
 
   def respcomentario(chamado)
     @chamado = chamado
-    mail(:to => chamado.user.email, :subject => "Comentario do tecnico")
+    if @chamado.id < 773
+      mail(:to => chamado.user.email, :subject => "Comentario do tecnico")
+    else
+      mail(:to => chamado.usuario.emailPrincipalUsuario, :subject => "Comentario do tecnico")
+    end
   end
 
 

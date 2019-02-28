@@ -9,6 +9,7 @@ class ComentariosController < ApplicationController
     @chamado = Chamado.find(params[:chamado_id])
     @comentario = @chamado.comentarios.create(params[:comentario])
     @comentario.user_id = session[:user]
+    @comentario.usuario_id = current_user.id
     @comentario.save
     if @comentario.respPorEmail == true
       UserMailer.respcomentario(@chamado).deliver

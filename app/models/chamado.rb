@@ -5,9 +5,7 @@ class Chamado < ActiveRecord::Base
   belongs_to :usuario
   has_many :comentarios,   dependent: :destroy
 
-  validates_numericality_of :user_id
-
-  def self.total_geral(date, predio) #def para o grafico de chamados busca pela data e pelo predio
+    def self.total_geral(date, predio) #def para o grafico de chamados busca pela data e pelo predio
     where("(month(created_at) = ? and year(created_at) = ?) and predio = ? " , date, Time.now.year, predio).count()
 
   end

@@ -18,21 +18,32 @@
 
     <p>
       <b>Usu&aacute;rio:</b>
-      <!--< %= @chamado.user.nome %> -->
-      <%= @chamado.usuario.nomeUsuario %>
+      <% if @chamado.id > 773 %>
+          <%= @chamado.usuario.nomeUsuario %>
+      <% else %>
+          <%= @chamado.user.nome %>
+      <% end %>
+
     </p>
 
     <p>
       <b>Ramal:</b>
-      <!-- < %= @chamado.user.ramal %> -->
-      <%= @chamado.usuario.ramalUSP %>
+      <% if @chamado.id > 773 %>
+         <% d=@chamado.usuario.numeroTelefoneFormatado.split(":") %>
+          <%= d[1].to_i  %>
+      <% else %>
+          <%= @chamado.user.ramal %>
+      <% end %>
     </p>
-    <p>
+
 
     <p>
       <b>email:</b>
-      <!-- < %= @chamado.user.email %> -->
-      <%= @chamado.usuario.emailPrincipalUsuario %>
+      <% if @chamado.id > 773 %>
+          <%= @chamado.usuario.emailPrincipalUsuario %>
+      <% else %>
+          <%= @chamado.user.email %>
+      <% end %>
     </p>
 
 <!--
@@ -79,8 +90,11 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
         <!-- Adaptar esse trecho para uso da senha unica. Trocar comentario.user.nome pelo valor que a senha unica pegar.  -->
         <p>
           <b>T&eacute;cnico:</b>
-          <!--< %= comentario.user.nome %> -->
-          <%= @comentario.usuarios.nomeUsuario %>
+          <% if @chamado.id < 773 %>
+              <%= comentario.user.nome %>
+          <% else %>
+              <%= comentario.usuario.nomeUsuario %>
+          <% end %>
         </p>
 
         <p>
@@ -101,14 +115,16 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
         <hr />
     <%end%>
 
-    <!-- < % if(session_user.type_id ==0 ) %> <!-- Se o usuario logado for user adm aparecera os campos para preenchimento -->
          <% if session[:perfil].include? "Administrador" %>
         <h3>Adicione um comentario:</h3>
         <%= form_for([@chamado, @chamado.comentarios.build]) do |f| %>
             <div class="field">
               <%= f.label :tecnico %>
-             <!-- <strong>< %= session_user.nome %></strong>         <!-- Automaticamente o campo de nome do tecnico eh preenchido - modificar isso de acordo com a senha unica -->
-
+              <% if @chamado.id < 773 %>
+                  <strong><%= @chamado.tecnico %></strong>
+              <% else %>
+                  <strong> <%= current_user.nomeUsuario %> </strong>
+              <% end %>
             </div>
             <div class="field">
               <%= f.label :conteudo %><br />
@@ -128,3 +144,5 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
 
     <br />
 <!-- < % end %> -->
+
+<%= link_to "Voltar", chamados_path, class: "btn btn-default" %>

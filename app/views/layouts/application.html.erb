@@ -37,15 +37,14 @@
           <% if session[:perfil].include? "Comum" %>
               <li> <%= link_to  'Chamados', chamados_path %></li>
           <% elsif session[:perfil].include? "Administrador" %>
-                    <li><%= link_to  'Chamados', chamados_path %></li>
-                    <!-- <li> < %= link_to 'Usuarios', :controller => "users" , :action => "index" %></li> -->
-                    <li> <%= link_to 'Usuarios', usuarios_path %> </li>
-                    <li><%= link_to 'Novo aviso', new_aviso_path %></li>
-                    <li><%= link_to 'Comentarios', :controller => "comentarios" , :action => "index" %></li>
-                    <li><%= link_to 'Relatorio', :controller => "chamados", :action => "relatorio" %></li>
-                    <li><%= link_to 'Logs', logs_path %> </li>
-                    <li><%= link_to 'Perfis', perfils_path %> </li>
-                    <li><%= link_to 'Permitidos', permitidos_path %>  </li>
+              <li><%= link_to  'Chamados', chamados_path %></li>
+              <li> <%= link_to 'Usuarios', usuarios_path %> </li>
+              <li><%= link_to 'Novo aviso', new_aviso_path %></li>
+              <li><%= link_to 'Comentarios', :controller => "comentarios" , :action => "index" %></li>
+              <li><%= link_to 'Relatorio', :controller => "chamados", :action => "relatorio" %></li>
+              <li><%= link_to 'Logs', logs_path %> </li>
+              <li><%= link_to 'Perfis', perfils_path %> </li>
+              <li><%= link_to 'Permitidos', permitidos_path %>  </li>
           <% end %>
           <li><%= link_to "Log out", logout_path %>  </li>
         </ul>

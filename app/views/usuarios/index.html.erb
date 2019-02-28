@@ -49,7 +49,8 @@
                     <td><%= usuario.loginUsuario %></td>
                     <td><%= usuario.nomeUsuario %></td>
                     <td><%= usuario.emailPrincipalUsuario %> </td>
-                    <td><%= usuario.ramalUsp %></td>
+                    <% d= usuario.numeroTelefoneFormatado.split(":") %>
+                    <td><%= d[1].to_i %></td>
                     <td><%= t.nomeSetor %>  </td>
                     <td class="text-center"><%= link_to 'Mostrar', usuario, class: "btn btn-default" %></td>
                 </tr>

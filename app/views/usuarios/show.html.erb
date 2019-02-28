@@ -19,14 +19,11 @@
 </p>
 
 <p>
-  <strong> Telefone </strong>
-  <%= @usuario.numeroTelefoneFormatado %>
+  <strong> Ramal </strong>
+  <% d = @usuario.numeroTelefoneFormatado.split(":") %>
+  <%= d[1].to_i  %>
 </p>
 
-<p>
-  <strong>  Ramal </strong>
-  <%= @usuario.ramalUsp %>
-</p>
 
 
 <table class="table table-bordered">

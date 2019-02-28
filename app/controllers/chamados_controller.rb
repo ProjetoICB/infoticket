@@ -33,50 +33,22 @@ end
 
 =end
 
-def index
- @chamados = Chamado.order('id desc')
 
 
-
-
-=begin
-
-    @user = User.find(:first, :conditions => {:id => session[:user]})
-
-    if @user.type_id == 1  #type_id iras servir para diferenciar usuarios de adms
-
-      @chamados = Chamado.find(:all, :conditions => { :user_id => session[:user] })  # somente os chamados do usuario logado podera ser visto
-      
-
-    elsif @user.type_id == 0
-
-      @chamados = Chamado.all       # o TECNICO poderah ver todos os chamados criados
-
+  def index
+    @usuario = Usuario.find(current_user.id)
+    if session[:perfil].include? "Comum"
+      @chamados = Chamado.where(usuario_id: current_user.id).order("id desc")
+      @tipo_vinculo = TipoVinculo.find_by_usuario_id(current_user.id)
+    else
+      @chamados = Chamado.order('id desc')
     end
-
-=end
 
     respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @chamados }
-    end
-end
-
-
-  def indexOld
-    @chamados = Chamado.order('id desc')
-    @user = User.find(:first, :conditions => {:id => session[:user]})
-    if @user.type_id == 1  #type_id iras servir para diferenciar usuarios de adms
-      @chamados = Chamado.find(:all, :conditions => { :user_id => session[:user] })  # somente os chamados do usuario logado podera ser visto
-    elsif @user.type_id == 0
-      @chamados = Chamado.all       # o TECNICO poderah ver todos os chamados criados
+      format.html
+      format.json { render json:  @chamados}
     end
   end
-
-
-
-
-
 
 
 
@@ -115,7 +87,7 @@ end
 
     @chamado = Chamado.new(params[:chamado])
    # @chamado.user_id = session[:user]    #preenche automaticamente o  campo user_id com o usuario logado
-    @chamado.user_id = session[:login]
+    @chamado.usuario_id = current_user.id
 
     respond_to do |format|
       if @chamado.save
@@ -145,7 +117,7 @@ end
           format.json { render json: @chamado.errors, status: :unprocessable_entity }
         else
           #UserMailer.chamados_update(@chamado).deliver #alterado 31/03/2015
-          #UserMailer.chamados_atender(@chamado).deliver
+          UserMailer.chamados_atender(@chamado).deliver
             format.html { redirect_to @chamado, notice: 'Chamado foi atualizado com successo.' }
           format.json { head :no_content }
         end

@@ -49,47 +49,19 @@
         <th>Num. Patrimonio:</th>
         <th>Status:</th>
         <th>Resp. t&eacute;cnico:</th>
-
-<!--         < % if @user.type_id != 1  %> -->
-
-      <th>Observa&ccedil;&atilde;o</th>
-<!--        < % end %> -->
-
+        <th>Observa&ccedil;&atilde;o</th>
       </tr>
-
       </thead>
-
-<!--      < % if @user.type_id != 1 %>       <!--se o usuario for administrador ira ver todos os chamados existentes -->
-
-          <tbody>
+      <tbody>
           <% @chamados.each do |chamado| %>
-              <tr>                            <!-- Da forma a tabela -->
-                <!--<td>< %=link_to chamado.id , edit_chamado_path(chamado) %>  < %= link_to raw( "<i class=\"icon-search icon-white\"></i>"), chamado_path(chamado) %></td>   -->  <!--link para editar o chamado -->
-                <td><%=link_to chamado.id , edit_chamado_path(chamado) %>  <%= link_to "Mostrar", chamado_path(chamado) %></td>
+            <% if !chamado.user.nil? %>
+              <tr>
+                <td> <%=chamado.id  %> <%= link_to "Mostrar", chamado_path(chamado) %>  </td>
                 <td><%= chamado.created_at.strftime("%d/%m/%Y") %></td>
                 <td><%= chamado.titulo  %></td>
-
-                <% if chamado.id <=773 %>
-                        <td><%= chamado.user.nome %></td>
-                        <td><%= chamado.user.ramal %></td>
-                        <td><%= chamado.user.departamento %></td>
-                <% else %>
-                    <!-- Esta lógica tem algum erro -->
-                     <% @usuarios = Usuario.all %>
-                    <% @usuarios.each do |u| %>
-                        <% @tvinc = TipoVinculo.where(usuario_id: u.id) %>
-                        <% @tvinc.each do |t| %>
-                            <% @cham = Chamado.where(user_id: u.loginUsuario) %>
-                            <% @cham.each do |c| %>
-                                <td> <%= u.nomeUsuario %></td>
-                                <td> <%= u.numeroTelefoneFormatado %> </td>
-                                <td> <%= t.nomeSetor %> </td>
-                             <% end %>  
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <!-- fim -->
-
+                <td><%= chamado.user.nome   %></td>
+                <td><%= chamado.user.ramal  %></td>
+                <td><%= chamado.user.departamento %></td>
                 <td><%= chamado.sala %></td>
                 <td><%= chamado.predio %></td>
                 <td><%= chamado.patrimonio %></td>     
@@ -97,38 +69,10 @@
                 <td><%= chamado.tecnico %></td>
                 <td><%= chamado.obs %></td>
               </tr>
+            <% end %>
           <% end %>
 
-
-
-<!--
-      < % else %>               <!-- se o usuario nao for administrador vera somente os chamados respectivos ao seu id
-
-          < % @chamados.each do |chamado| %>
-              <tr>    <!-- Da forma a tabela
-                <td>< %= link_to chamado.id , chamado  %></td>        <!-- link para o usuario ver todas as informacoes do chamado criado
-                <td>< %= chamado.created_at.strftime("%d/%b./%Y") %></td>
-                <td>< %= chamado.titulo %></td>
-                <td>< %= chamado.user.nome %></td>
-                <td>< %= chamado.sala %></td>
-                <td>< %= chamado.user.ramal %></td>
-                <td>< %= chamado.user.departamento %></td>
-                <td>< %= chamado.predio %></td>
-                <td>< %= chamado.patrimonio %></td>
-		        <td>< %= chamado.status %></td>
-                <td>< %= chamado.tecnico %></td>
-              </tr>
-          < %end %>
--->
           </tbody>
           </table>
-
-<!--      < % end %> -->
-
-
-    <a class="btn btn-primary" <%= link_to ("Novo"),  new_chamado_path%></a>
-<!--      < % if @user.type_id == 0 %> -->
-
-      <a class="btn btn-success"<%= link_to ('Resumo'), :controller => 'chamados', :action => 'resumo' %> </a>
-      <a class="btn btn-info"<%= link_to ('Resumo Admin'), :controller => 'chamados', :action => 'resumopp' %> </a>
-<!--      < % end %> -->
+        <a class="btn btn-success"<%= link_to ('Resumo'), :controller => 'chamados', :action => 'resumo' %> </a>
+        <a class="btn btn-info"<%= link_to ('Resumo Admin'), :controller => 'chamados', :action => 'resumopp' %> </a>

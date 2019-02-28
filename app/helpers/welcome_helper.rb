@@ -3,6 +3,7 @@ module WelcomeHelper
   #cria uma sessão
   def log_in(loginUsuario)
     session[:login] = loginUsuario
+
     puts "\n"
     puts "Session de login = "
     puts session[:login]

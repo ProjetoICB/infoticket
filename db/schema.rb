@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190122170314) do
+ActiveRecord::Schema.define(:version => 20190226133744) do
 
   create_table "avisos", :force => true do |t|
     t.text     "quadro_de_avisos"
@@ -22,8 +22,8 @@ ActiveRecord::Schema.define(:version => 20190122170314) do
   create_table "chamados", :force => true do |t|
     t.string   "titulo"
     t.text     "descricao"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "status"
     t.integer  "user_id"
     t.integer  "type_id"
@@ -32,23 +32,22 @@ ActiveRecord::Schema.define(:version => 20190122170314) do
     t.string   "tecnico"
     t.string   "patrimonio"
     t.text     "obs"
+    t.integer  "usuario_id"
   end
 
   add_index "chamados", ["user_id"], :name => "index_chamados_on_user_id"
 
   create_table "comentarios", :force => true do |t|
-    t.string   "tecnico"
     t.text     "conteudo"
-    t.integer  "chamados_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "chamado_id"
     t.integer  "user_id"
     t.boolean  "respPorEmail"
+    t.integer  "usuario_id"
   end
 
   add_index "comentarios", ["chamado_id"], :name => "index_comentarios_on_chamado_id"
-  add_index "comentarios", ["chamados_id"], :name => "index_comentarios_on_chamados_id"
 
   create_table "logs", :force => true do |t|
     t.string   "acao"

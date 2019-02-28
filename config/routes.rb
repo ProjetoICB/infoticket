@@ -5,7 +5,6 @@ Suporte2::Application.routes.draw do
   get 'welcome/login'
   get 'welcome/callback'
   get 'logout' => 'welcome#destroy', as: 'logout'
-  get 'indexOld' => 'chamados#indexOld' , as: 'chamados_antigos'
 
 
   resources :usuarios
