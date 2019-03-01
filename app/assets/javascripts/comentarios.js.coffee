@@ -4,7 +4,8 @@
 jQuery ->
   $('#comentarios').dataTable({
             "bPaginate": true,
-            "iDisplayLength": 25,
+            "iDisplayLength": 10,
+            "aaSorting": [],
  		"oLanguage": {
                 "sProcessing":   "Processando...",
                 "sLengthMenu":   "Mostrar _MENU_ registros",

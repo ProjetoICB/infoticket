@@ -1,7 +1,11 @@
 class ComentariosController < ApplicationController
 
   def index
-    @comentarios = Comentario.find(:all)
+    @comentarios = Comentario.order("chamado_id desc")
+    respond_to do |format|
+      format.html
+      format.json { render json:  @chamados}
+    end
   end
 
 
