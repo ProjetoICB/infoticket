@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def index
     #@users = User.all.paginate(:page => params[:page],:per_page => 20)   # ira mostrar a lista de usuarios 20 por pagina
    @users = User.all
+   session[:avisa] = false
    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }

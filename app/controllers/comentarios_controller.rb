@@ -2,6 +2,7 @@ class ComentariosController < ApplicationController
 
   def index
     @comentarios = Comentario.order("chamado_id desc")
+    session[:avisa] = false
     respond_to do |format|
       format.html
       format.json { render json:  @chamados}

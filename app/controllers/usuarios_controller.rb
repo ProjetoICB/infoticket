@@ -4,6 +4,7 @@ class UsuariosController < ApplicationController
 
   def index
     @usuarios = Usuario.all
+    session[:avisa] = false
   end
 
   def edit

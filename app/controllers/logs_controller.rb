@@ -7,6 +7,7 @@ class LogsController < ApplicationController
   # GET /logs.json
   def index
     @logs = Log.order('id desc')
+    session[:avisa] = false
   end
 
   # GET /logs/1

@@ -27,11 +27,15 @@ def resumo
 
 end
 
+=end
+
+
 def relatorio
-  @chamado = Chamado.find(:all)   # def para o funcionameto dos graficos
+  @chamado = Chamado.all   # def para o funcionameto dos graficos
+  session[:avisa] = false
 end
 
-=end
+
 
 
 
@@ -44,6 +48,8 @@ end
       @chamados = Chamado.order('id desc')
     end
 
+    @aviso = Aviso.last.quadro_de_avisos
+
     respond_to do |format|
       format.html
       format.json { render json:  @chamados}
@@ -52,11 +58,15 @@ end
 
 
 
+
+
+
   # GET /chamados/1
   # GET /chamados/1.json
   def show
 
     @chamado = Chamado.find(params[:id])
+    session[:avisa] = false
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @chamado }
@@ -68,6 +78,8 @@ end
   def new
 
      @chamado = Chamado.new
+     session[:avisa] = false
+
 
     respond_to do |format|
       format.html # new.html.erb
@@ -78,7 +90,7 @@ end
   # GET /chamados/1/edit
   def edit
     @chamado = Chamado.find(params[:id])
-
+    session[:avisa] = false
   end
 
   # POST /chamados
@@ -86,7 +98,6 @@ end
   def create
 
     @chamado = Chamado.new(params[:chamado])
-   # @chamado.user_id = session[:user]    #preenche automaticamente o  campo user_id com o usuario logado
     @chamado.usuario_id = current_user.id
 
     respond_to do |format|
@@ -135,6 +146,7 @@ end
   def destroy                                   #esta def nao eh utilizada nesta aplicacao
     @chamado = Chamado.find(params[:id])
     @chamado.destroy
+    session[:avisa] = false
 
     respond_to do |format|
       format.html { redirect_to chamados_url }

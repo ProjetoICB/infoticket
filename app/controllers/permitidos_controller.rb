@@ -9,6 +9,7 @@ class PermitidosController < ApplicationController
   # GET /permitidos.json
   def index
     @permitidos = Permitido.all
+    session[:avisa] = false
   end
 
   # GET /permitidos/1

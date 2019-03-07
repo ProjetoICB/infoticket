@@ -4,6 +4,8 @@ module WelcomeHelper
   def log_in(loginUsuario)
     session[:login] = loginUsuario
 
+
+
     puts "\n"
     puts "Session de login = "
     puts session[:login]
@@ -26,6 +28,7 @@ module WelcomeHelper
    @perfilscadastrados = Permitido.where('usuario_id = ?', current_user.id)
 
     session[:perfil] ||= []
+    session[:avisa] = true
 
     @perfilscadastrados.each do |p|
       session[:perfil] << p.perfil.tipo

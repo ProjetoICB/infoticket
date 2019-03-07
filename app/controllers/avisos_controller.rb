@@ -3,6 +3,7 @@ class AvisosController < ApplicationController
   # GET /avisos.json
   def index
   @aviso = Aviso.all
+  session[:avisa] = false
 
     respond_to do |format|
       format.html # index.html.erb

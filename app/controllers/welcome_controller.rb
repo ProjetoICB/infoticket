@@ -9,18 +9,13 @@ class WelcomeController < ApplicationController
   def callback
     s = Senhaunica.new('icb_oauth','6QCwxtVxNmdK4XvHp5XJ7SqznjwA7Ecq9VNzUpOW','2')
     @data = s.callback(params[:oauth_verifier])
-
     print "Data = " +   @data.to_s
-
     loginUsuario = tratauser
-
     log_in loginUsuario
-
     carregaperfils
-
     addlog("Fez login no sistema")
-
     redirect_to chamados_path, notice: "Login feito com sucesso"
+
 
 
 

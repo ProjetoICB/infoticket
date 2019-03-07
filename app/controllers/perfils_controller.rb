@@ -7,6 +7,7 @@ class PerfilsController < ApplicationController
   # GET /perfils.json
   def index
     @perfils = Perfil.all
+    session[:avisa] = false
   end
 
   # GET /perfils/1
