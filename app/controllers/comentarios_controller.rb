@@ -18,7 +18,7 @@ class ComentariosController < ApplicationController
     if @comentario.respPorEmail == true
       UserMailer.respcomentario(@chamado).deliver
     end
-       #UserMailer.chamados_update(@chamado).deliver # usuario receberah uma mensagem quando o status do chamado for alterado
+       UserMailer.chamados_update(@chamado).deliver # usuario receberah uma mensagem quando o status do chamado for alterado
     redirect_to chamado_path(@chamado)
   end
 

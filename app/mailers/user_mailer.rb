@@ -1,3 +1,4 @@
+
 class UserMailer < ActionMailer::Base
   default :from => "naoresponder@icb.usp.br"  
 
@@ -14,7 +15,11 @@ class UserMailer < ActionMailer::Base
 
   def chamados_update(chamado)    # a cada alteracao no chamado feita pelo tecnico o usuario recebera uma mensagem
     @chamado = chamado
-    mail(:to => chamado.user.email,:subject => "Infoticket - Alteracao de status")
+    if @chamado.id < 773
+      mail(:to => chamado.user.email,:subject => "Infoticket - Alteracao de status")
+    else
+      mail(:to => chamado.usuario.emailPrincipalUsuario, :subject => "Alteracao de status")
+    end
   end
 
   def chamados_new(chamado)      # usuario recebera uma mensagem de confirmacao
