@@ -18,7 +18,7 @@
 
     <p>
       <b>Usu&aacute;rio:</b>
-      <% if @chamado.id > 773 %>
+      <% if @chamado.id > 1252 %>
           <%= @chamado.usuario.nomeUsuario %>
       <% else %>
           <%= @chamado.user.nome %>
@@ -28,7 +28,7 @@
 
     <p>
       <b>Ramal:</b>
-      <% if @chamado.id > 773 %>
+      <% if @chamado.id > 1252 %>
          <% d=@chamado.usuario.numeroTelefoneFormatado.split(":") %>
           <%= d[1].to_i  %>
       <% else %>
@@ -39,7 +39,7 @@
 
     <p>
       <b>email:</b>
-      <% if @chamado.id > 773 %>
+      <% if @chamado.id > 1252 %>
           <%= @chamado.usuario.emailPrincipalUsuario %>
       <% else %>
           <%= @chamado.user.email %>
@@ -87,10 +87,9 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
     <h1>Coment&aacute;rios</h1>
 
     <% @chamado.comentarios.each do |comentario| %>
-        <!-- Adaptar esse trecho para uso da senha unica. Trocar comentario.user.nome pelo valor que a senha unica pegar.  -->
         <p>
           <b>T&eacute;cnico:</b>
-          <% if @chamado.id < 773 %>
+          <% if @chamado.id < 1253 %>
               <%= comentario.user.nome %>
           <% else %>
               <%= comentario.usuario.nomeUsuario %>
@@ -120,7 +119,7 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
         <%= form_for([@chamado, @chamado.comentarios.build]) do |f| %>
             <div class="field">
               <%= f.label :tecnico %>
-              <% if @chamado.id < 773 %>
+              <% if @chamado.id < 1253 %>
                   <strong><%= @chamado.tecnico %></strong>
               <% else %>
                   <strong> <%= current_user.nomeUsuario %> </strong>

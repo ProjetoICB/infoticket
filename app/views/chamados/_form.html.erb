@@ -75,7 +75,7 @@
                 <div class="control-group">
                   <%= f.label :tecnico, :class => 'control-label' %>
                   <div class="controls">
-                    <% if @chamado.id > 773 %>
+                    <% if @chamado.id > 1252 %>
                         <%= f.text_field :tecnico, :class => 'text_field', :value => current_user.nomeUsuario, :readonly => true %><div class="av_doc"></div>
                     <% else %>
                         <%= f.text_field :tecnico, :class => 'text_field' %><div class="av_doc"></div>

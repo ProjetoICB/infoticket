@@ -75,7 +75,7 @@
              <td><%=link_to chamado.id , edit_chamado_path(chamado) %>  <%= link_to "Mostrar", chamado_path(chamado) %></td>  <!--link para editar o chamado -->
              <td><%= chamado.created_at.strftime("%d/%m/%Y") %></td>
              <td><%= chamado.titulo  %></td>
-             <% if chamado.id > 773 %>
+             <% if chamado.id > 1252 %>
                  <td><%= chamado.usuario.nomeUsuario %> </td>
                   <% d = chamado.usuario.numeroTelefoneFormatado.split(":") %>
                  <td><%= d[1].to_i %></td>

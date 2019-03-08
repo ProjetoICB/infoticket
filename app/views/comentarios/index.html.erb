@@ -14,10 +14,10 @@
   <tbody>
   <% @comentarios.each do |comentario| %>
    <tr>
-     <td><%=link_to comentario.chamado.id , comentario %></td>
+     <td><%=  link_to comentario.chamado.id,comentario %></td>
     <td><%= comentario.created_at.strftime("%d/%m/%Y") %></td>
      <td>
-       <% if comentario.chamado.id > 773 %>
+       <% if comentario.chamado_id > 1252 %>
             <%= comentario.usuario.nomeUsuario %>
         <% else %>
            <%= comentario.user.nome %>

@@ -15,7 +15,7 @@ class UserMailer < ActionMailer::Base
 
   def chamados_update(chamado)    # a cada alteracao no chamado feita pelo tecnico o usuario recebera uma mensagem
     @chamado = chamado
-    if @chamado.id < 773
+    if @chamado.id < 1253
       mail(:to => chamado.user.email,:subject => "Infoticket - Alteracao de status")
     else
       mail(:to => chamado.usuario.emailPrincipalUsuario, :subject => "Alteracao de status")
@@ -30,7 +30,7 @@ class UserMailer < ActionMailer::Base
 
   def respcomentario(chamado)
     @chamado = chamado
-    if @chamado.id < 773
+    if @chamado.id < 1253
       mail(:to => chamado.user.email, :subject => "Comentario do tecnico")
     else
       mail(:to => chamado.usuario.emailPrincipalUsuario, :subject => "Comentario do tecnico")
