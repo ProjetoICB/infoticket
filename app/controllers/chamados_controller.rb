@@ -4,40 +4,35 @@ class ChamadosController < ApplicationController
 require 'will_paginate/array'   #necessario para gem funcionar
 
  before_filter :usuario_autenticado?
-=begin
-def resumopp
 
-  @chamados = Chamado.find(:all , :conditions => {:status => ["Em atendimento","Encaminhado"] })
+  def resumopp
 
-  respond_to do |format|
-    format.html # index.html.erb
-    format.json { render json: @chamados }
+
+    @chamados = Chamado.where(status: ["Em atendimento", "Encaminhado"])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @chamados }
+    end
+
   end
 
-end
+  def resumo
 
-def resumo
+    @chamados = Chamado.where(status: ["Em atendimento","Aguardando atendimento","Encaminhado"] )
 
-  @chamados = Chamado.find(:all , :conditions => {:status => ["Em atendimento","Aguardando atendimento","Encaminhado"] })
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @chamados }
+    end
 
-  respond_to do |format|
-    format.html # index.html.erb
-    format.json { render json: @chamados }
   end
 
-end
 
-=end
-
-
-def relatorio
-  @chamado = Chamado.all   # def para o funcionameto dos graficos
-  session[:avisa] = false
-end
-
-
-
-
+  def relatorio
+    @chamado = Chamado.all   # def para o funcionameto dos graficos
+    session[:avisa] = false
+  end
 
   def index
     @usuario = Usuario.find(current_user.id)
