@@ -2,11 +2,11 @@ class Usuario < ActiveRecord::Base
 
   attr_accessible :loginUsuario, :nomeUsuario, :tipoUsuario, :emailPrincipalUsuario, :emailAlternativoUsuario, :emailUspUsuario, :numeroTelefoneFormatado, :ramalUsp
 
-  has_many :chamados
+  has_many :chamados, dependent: :destroy
   has_many :comentarios,  dependent: :destroy
   has_many :tipo_vinculos, dependent: :destroy
   has_many :logs, :dependent => :destroy
-  has_many :permitidos
+  has_many :permitidos, dependent: :destroy
   has_many :perfils, through: :permitidos
 
 

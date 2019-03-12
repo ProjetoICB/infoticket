@@ -71,6 +71,18 @@ class WelcomeController < ApplicationController
       tipoVinc.tipoVinculo = v["tipoVinculo"]
       tipoVinc.usuario_id = id
       tipoVinc.save!
+      if tipoVinc.tipoVinculo == "SERVIDOR" or tipoVinc.tipoVinculo == "DOCENTE"
+        permitido = Permitido.where(:usuario_id => id)
+        if permitido.empty?
+          addpermitido = Permitido.new
+          perfilcomum = Perfil.find_by_tipo("Comum")
+          addpermitido.usuario_id = id
+          addpermitido.perfil_id = perfilcomum.id
+          addpermitido.save!
+        end
+      else
+        user.destroy
+      end
     end
     return loginUsuario
   end
