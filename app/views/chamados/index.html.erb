@@ -107,7 +107,13 @@
        <% end %>
       </tbody>
       </table>
-<a class="btn btn-primary" <%= link_to ("Novo"),  new_chamado_path%></a>
+
+<% if session[:perfil].include? "Comum" %>
+    <a class="btn btn-primary" <%= link_to ("Novo"),  new_chamado_path%></a>
+<% end %>
+
+
+
 <% if session[:perfil].include? "Administrador" %>
     <a class="btn btn-success"<%= link_to ('Resumo'), :controller => 'chamados', :action => 'resumo' %> </a>
     <a class="btn btn-info"<%= link_to ('Resumo Admin'), :controller => 'chamados', :action => 'resumopp' %> </a>

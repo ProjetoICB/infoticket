@@ -85,6 +85,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
   # GET /chamados/1/edit
   def edit
     @chamado = Chamado.find(params[:id])
+    @permitidos = Permitido.where(perfil_id: 1).map{ |perm| [perm.usuario.nomeUsuario]}
     session[:avisa] = false
   end
 

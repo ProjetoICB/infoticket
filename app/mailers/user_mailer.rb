@@ -42,21 +42,19 @@ class UserMailer < ActionMailer::Base
 
     @chamado = chamado
 
-    if chamado.tecnico == 'Charles'
+    if chamado.tecnico == 'Charles Uri dos Santos Costa'
       mail(:to => "charles@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Fabiana'
+    elsif chamado.tecnico == 'Fabiana dde Melo Munhoz Rodrigues'
       mail(:to => "farodrigues@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Daniel'
-      mail(:to =>"dpassarini@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Sidnei'
+    elsif chamado.tecnico == 'Sidnei de Assis Vieira'
       mail(:to =>"sidnei@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Edson'
+    elsif chamado.tecnico == 'Edson Goncalves de Araujo'
       mail(:to =>"edsonx@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Gerardo'
+    elsif chamado.tecnico == 'Gerardo Nantes Casalderrey'
       mail(:to =>"sidnei@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Marilene'
+    elsif chamado.tecnico == 'Marilene Guimaraes'
       mail(:to =>"marilene@icb.usp.br",:subject => "Infoticket - Chamado para atender")
-    elsif chamado.tecnico == 'Cesar'
+    elsif chamado.tecnico == 'Cesar de Paula Souza'
       mail(:to =>"cesarps@icb.usp.br",:subject => "Infoticket - Chamado para atender")
     end
 

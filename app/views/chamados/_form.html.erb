@@ -76,7 +76,8 @@
                   <%= f.label :tecnico, :class => 'control-label' %>
                   <div class="controls">
                     <% if @chamado.id > 1252 %>
-                        <%= f.text_field :tecnico, :class => 'text_field', :value => current_user.nomeUsuario, :readonly => true %><div class="av_doc"></div>
+                        <!--< %= f.text_field :tecnico, :class => 'text_field', :value => current_user.nomeUsuario, :readonly => true %><div class="av_doc"></div> -->
+                        <%= f.select :tecnico, options_for_select(@permitidos, selected: f.object.tecnico), include_blank:true %>
                     <% else %>
                         <%= f.text_field :tecnico, :class => 'text_field' %><div class="av_doc"></div>
                     <% end %>

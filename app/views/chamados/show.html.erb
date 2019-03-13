@@ -119,11 +119,7 @@ Este pedaço envolve a tabela vinculo, verificar como esta no index
         <%= form_for([@chamado, @chamado.comentarios.build]) do |f| %>
             <div class="field">
               <%= f.label :tecnico %>
-              <% if @chamado.id < 1253 %>
-                  <strong><%= @chamado.tecnico %></strong>
-              <% else %>
-                  <strong> <%= current_user.nomeUsuario %> </strong>
-              <% end %>
+              <strong><%= @chamado.tecnico %></strong>
             </div>
             <div class="field">
               <%= f.label :conteudo %><br />
