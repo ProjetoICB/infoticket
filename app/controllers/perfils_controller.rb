@@ -33,7 +33,7 @@ class PerfilsController < ApplicationController
 
     respond_to do |format|
       if @perfil.save
-      #  addlog("Criou um novo perfil")
+         addlog("Criou um novo perfil")
         format.html { redirect_to @perfil, notice: 'Perfil foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @perfil }
       else
@@ -49,7 +49,7 @@ class PerfilsController < ApplicationController
     @perfil = Perfil.find(params[:id])
     respond_to do |format|
       if @perfil.update_attributes(params[:perfil])
-     #   addlog("Atualizou um perfil")
+         addlog("Atualizou um perfil")
         format.html { redirect_to @perfil, notice: 'Perfil foi atualizado com sucesso' }
         format.json { render :show, status: :ok, location: @perfil }
       else

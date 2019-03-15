@@ -16,6 +16,7 @@ class ComentariosController < ApplicationController
     @comentario.user_id = session[:user]
     @comentario.usuario_id = current_user.id
     @comentario.save
+    addlog("Criou um comentario")
     if @comentario.respPorEmail == true
       UserMailer.respcomentario(@chamado).deliver
     end

@@ -103,6 +103,8 @@ require 'will_paginate/array'   #necessario para gem funcionar
       if @chamado.save
           #corrigir essa linha de baixo
           #UserMailer.chamados_new(@chamado).deliver     # envia uma mensagem para o usuario que criou o chamado
+        addlog("Criou um chamado")
+
 
         format.html { redirect_to @chamado, notice: 'Voce vai receber um email informando para qual tecnico foi encaminhado.' }
         format.json { render json: @chamado, status: :created, location: @chamado }
@@ -123,6 +125,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
 
     respond_to do |format|
       if @chamado.update_attributes(params[:chamado])
+        addlog("Editou um chamado")
         if @chamado.tecnico == ""
           format.html { render action: "edit" }
           format.json { render json: @chamado.errors, status: :unprocessable_entity }
@@ -132,6 +135,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
             format.html { redirect_to @chamado, notice: 'Chamado foi atualizado com successo.' }
           format.json { head :no_content }
         end
+
       else
         format.html { render action: "edit" }
         format.json { render json: @chamado.errors, status: :unprocessable_entity }
@@ -142,9 +146,10 @@ require 'will_paginate/array'   #necessario para gem funcionar
   # DELETE /chamados/1
   # DELETE /chamados/1.json
 
-  def destroy                                   #esta def nao eh utilizada nesta aplicacao
+  def destroy
     @chamado = Chamado.find(params[:id])
     @chamado.destroy
+    addlog("Apagou um chamado")
     ActiveRecord::Base.connection.execute("alter table chamados auto_increment = #{params[:id]}")
 
     session[:avisa] = false

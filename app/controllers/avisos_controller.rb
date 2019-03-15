@@ -46,6 +46,7 @@ class AvisosController < ApplicationController
 
     respond_to do |format|
       if @aviso.save
+        addlog("Criou um novo aviso")
         format.html { redirect_to @aviso, notice: 'Aviso foi criado com sucesso.' }
         format.json { render json: @aviso, status: :created, location: @aviso }
       else
@@ -62,6 +63,7 @@ class AvisosController < ApplicationController
 
     respond_to do |format|
       if @aviso.update_attributes(params[:aviso])
+        addlog("Editou um aviso")
         format.html { redirect_to @aviso, notice: 'Aviso was successfully updated.' }
         format.json { head :no_content }
       else
@@ -76,6 +78,7 @@ class AvisosController < ApplicationController
   def destroy
     @aviso = Aviso.find(params[:id])
     @aviso.destroy
+    addlog("Apagou um aviso")
 
     respond_to do |format|
       format.html { redirect_to avisos_url }
