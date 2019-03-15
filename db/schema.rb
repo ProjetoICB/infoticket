@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20190226133744) do
+ActiveRecord::Schema.define(:version => 20190314181843) do
 
   create_table "avisos", :force => true do |t|
     t.text     "quadro_de_avisos"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20190226133744) do
     t.string   "patrimonio"
     t.text     "obs"
     t.integer  "usuario_id"
+    t.string   "departamento"
   end
 
   add_index "chamados", ["user_id"], :name => "index_chamados_on_user_id"
@@ -105,6 +106,23 @@ ActiveRecord::Schema.define(:version => 20190226133744) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "nome"
+    t.string   "login"
+    t.string   "senha"
+    t.string   "email"
+    t.string   "ramal"
+    t.string   "departamento"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+    t.string   "auth_token"
+    t.string   "senha_reset_token"
+    t.datetime "senha_reset_sent_at"
+    t.integer  "type_id"
+    t.string   "sobrenome"
+    t.string   "n_usp"
+  end
+
+  create_table "users_orig", :force => true do |t|
     t.string   "nome"
     t.string   "login"
     t.string   "senha"

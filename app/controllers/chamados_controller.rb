@@ -73,6 +73,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
   def new
 
      @chamado = Chamado.new
+     @departamentos = ['Administracao','Anatomia',"Biologia Celular", "Farmacologia", "Fisiologia", "Imunologia","Microbiologia", "Parasitologia"]
      session[:avisa] = false
 
 
@@ -86,6 +87,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
   def edit
     @chamado = Chamado.find(params[:id])
     @permitidos = Permitido.where(perfil_id: 1).map{ |perm| [perm.usuario.nomeUsuario]}
+    @departamentos = ['Administracao','Anatomia',"Biologia Celular", "Farmacologia", "Fisiologia", "Imunologia","Microbiologia", "Parasitologia"]
     session[:avisa] = false
   end
 
@@ -95,6 +97,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
 
     @chamado = Chamado.new(params[:chamado])
     @chamado.usuario_id = current_user.id
+    @departamentos = ['Administracao','Anatomia',"Biologia Celular", "Farmacologia", "Fisiologia", "Imunologia","Microbiologia", "Parasitologia"]
 
     respond_to do |format|
       if @chamado.save
@@ -116,6 +119,7 @@ require 'will_paginate/array'   #necessario para gem funcionar
 
     @chamado = Chamado.find(params[:id])
     @users = User.all
+    @departamentos = ['Administracao','Anatomia',"Biologia Celular", "Farmacologia", "Fisiologia", "Imunologia","Microbiologia", "Parasitologia"]
 
     respond_to do |format|
       if @chamado.update_attributes(params[:chamado])
@@ -138,10 +142,11 @@ require 'will_paginate/array'   #necessario para gem funcionar
   # DELETE /chamados/1
   # DELETE /chamados/1.json
 
-
   def destroy                                   #esta def nao eh utilizada nesta aplicacao
     @chamado = Chamado.find(params[:id])
     @chamado.destroy
+    ActiveRecord::Base.connection.execute("alter table chamados auto_increment = #{params[:id]}")
+
     session[:avisa] = false
 
     respond_to do |format|
@@ -149,4 +154,8 @@ require 'will_paginate/array'   #necessario para gem funcionar
       format.json { head :no_content }
     end
   end
+
+
+
+
 end

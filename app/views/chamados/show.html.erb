@@ -1,143 +1,145 @@
-<!-- < % if session_user != nil %> Modifiar essas linhas de acordo com o perfil da senha unica -->
-    <p id="notice">Chamado foi criado com sucesso! <%= notice %></p>
+<p id="notice">Chamado foi criado com sucesso! <%= notice %></p>
 
-    <p>
-      <b>T&iacute;tulo:</b>
-      <%= @chamado.titulo %>
-    </p>
+<p>
+  <b>T&iacute;tulo:</b>
+  <%= @chamado.titulo %>
+</p>
 
-    <p>
-      <b>Descri&ccedil;&atilde;o:</b>
-      <%= @chamado.descricao %>
-    </p>
+<p>
+  <b>Descri&ccedil;&atilde;o:</b>
+  <%= @chamado.descricao %>
+</p>
 
-    <p>
-      <b>Status:</b>
-      <%= @chamado.status %>
-    </p>
+<p>
+  <b>Status:</b>
+  <%= @chamado.status %>
+</p>
 
-    <p>
-      <b>Usu&aacute;rio:</b>
-      <% if @chamado.id > 1252 %>
-          <%= @chamado.usuario.nomeUsuario %>
-      <% else %>
-          <%= @chamado.user.nome %>
-      <% end %>
+<p>
+  <b>Usu&aacute;rio:</b>
+  <% if @chamado.id > 1252 %>
+      <%= @chamado.usuario.nomeUsuario %>
+  <% else %>
+      <%= @chamado.user.nome %>
+  <% end %>
 
-    </p>
+</p>
 
-    <p>
-      <b>Ramal:</b>
-      <% if @chamado.id > 1252 %>
-         <% d=@chamado.usuario.numeroTelefoneFormatado.split(":") %>
-          <%= d[1].to_i  %>
-      <% else %>
-          <%= @chamado.user.ramal %>
-      <% end %>
-    </p>
+<p>
+  <b>Ramal:</b>
+  <% if @chamado.id > 1252 %>
+     <% d=@chamado.usuario.numeroTelefoneFormatado.split(":") %>
+      <%= d[1].to_i  %>
+  <% else %>
+      <%= @chamado.user.ramal %>
+  <% end %>
+</p>
 
 
-    <p>
-      <b>email:</b>
-      <% if @chamado.id > 1252 %>
-          <%= @chamado.usuario.emailPrincipalUsuario %>
-      <% else %>
-          <%= @chamado.user.email %>
-      <% end %>
-    </p>
+<p>
+  <b>email:</b>
+  <% if @chamado.id > 1252 %>
+      <%= @chamado.usuario.emailPrincipalUsuario %>
+  <% else %>
+      <%= @chamado.user.email %>
+  <% end %>
+</p>
 
-<!--
-Este pedaço envolve a tabela vinculo, verificar como esta no index
-    <p>
-      <b>Departamento:</b>
-      < %= @chamado.user.departamento %>
-    </p>
--->
+<p>
+<b>Departamento:</b>
+<% if @chamado.id > 1252 %>
+  <%= @chamado.departamento %>
+<% else %>
+  <%= @chamado.user.departamento %>
+<% end %>
+</p>
 
-    <p>
-      <b>Local:</b>
-      <%= @chamado.sala %>
-    </p>
+<p>
+  <b>Local:</b>
+  <%= @chamado.sala %>
+</p>
 
-    <p>
-      <b>Pr&eacute;dio:</b>
-      <%= @chamado.predio %>
-    </p>
+<p>
+  <b>Pr&eacute;dio:</b>
+  <%= @chamado.predio %>
+</p>
 
-    <p>
-      <b>Patrimonio:</b>
-      <%= @chamado.patrimonio  %>
-    </p>
+<p>
+  <b>Patrimonio:</b>
+  <%= @chamado.patrimonio  %>
+</p>
 
+<p>
+  <b>T&eacute;cnico:</b>
+  <%= @chamado.tecnico  %>
+</p>
+
+<p>
+  <b>Observa&ccedil;&atilde;o:</b>
+  <%= @chamado.obs  %>
+</p>
+
+<p>
+  <b>Criado em:</b>
+  <%= @chamado.created_at.strftime("%d/%m/%Y - %H:%M") %>
+</p>
+
+<h1>Coment&aacute;rios</h1>
+
+<% @chamado.comentarios.each do |comentario| %>
     <p>
       <b>T&eacute;cnico:</b>
-      <%= @chamado.tecnico  %>
+      <% if @chamado.id < 1253 %>
+          <%= comentario.user.nome %>
+      <% else %>
+          <%= comentario.usuario.nomeUsuario %>
+      <% end %>
     </p>
 
     <p>
-      <b>Observa&ccedil;&atilde;o:</b>
-      <%= @chamado.obs  %>
+      <b>Coment&aacute;rio:</b>
+      <%= comentario.conteudo %>
     </p>
 
     <p>
-      <b>Criado em:</b>
-      <%= @chamado.created_at.strftime("%d/%m/%Y - %H:%M") %>
+      <b> Mandar comentário ao solcitante? </b>
+      <%= comentario.respPorEmail == true ? "Sim" : "Não" %>
     </p>
 
-    <h1>Coment&aacute;rios</h1>
+    <p>
+      <b>Coment&aacute;rio adicionado em:</b>
+      <%= comentario.created_at.strftime("%d/%m/%Y - %H:%M") %>
+    </p>
 
-    <% @chamado.comentarios.each do |comentario| %>
-        <p>
-          <b>T&eacute;cnico:</b>
-          <% if @chamado.id < 1253 %>
-              <%= comentario.user.nome %>
-          <% else %>
-              <%= comentario.usuario.nomeUsuario %>
-          <% end %>
-        </p>
+    <hr />
+<%end%>
 
-        <p>
-          <b>Coment&aacute;rio:</b>
-          <%= comentario.conteudo %>
-        </p>
-
-        <p>
-          <b> Mandar comentário ao solcitante? </b>
-          <%= comentario.respPorEmail == true ? "Sim" : "Não" %>
-        </p>
-
-        <p>
-          <b>Coment&aacute;rio adicionado em:</b>
-          <%= comentario.created_at.strftime("%d/%m/%Y - %H:%M") %>
-        </p>
-
-        <hr />
-    <%end%>
-
-         <% if session[:perfil].include? "Administrador" %>
+    <% if session[:perfil].include? "Administrador" %>
         <h3>Adicione um comentario:</h3>
         <%= form_for([@chamado, @chamado.comentarios.build]) do |f| %>
+        <div class="field">
+        <%= f.label :tecnico %>
+            <strong><%= @chamado.tecnico %></strong>
+        </div>
+        <div class="field">
+        <%= f.label :conteudo %><br />
+        <%= f.text_area :conteudo , :size => "30x10" %>
+        </div>
             <div class="field">
-              <%= f.label :tecnico %>
-              <strong><%= @chamado.tecnico %></strong>
-            </div>
-            <div class="field">
-              <%= f.label :conteudo %><br />
-              <%= f.text_area :conteudo , :size => "30x10" %>
-            </div>
-            <div class="field">
-              <%= f.check_box :respPorEmail %> Mandar esse comentario para o e-mail do solicitante
-            </div>
+            <%= f.check_box :respPorEmail %> Mandar esse comentario para o e-mail do solicitante
+        </div>
+        <br>
+        <div class="actions">
+            <%= f.submit "Criar comentario" %>
+        </div>
+    <% end %>
+ <% end %>
 
-            <br>
-            <div class="actions">
-              <%= f.submit "Criar comentario" %>
-            </div>
-        <% end %>
+<br />
 
-     <% end %>
-
-    <br />
-<!-- < % end %> -->
+<hr style="color:#00f;background-color: #00f;height: 3px;">
 
 <%= link_to "Voltar", chamados_path, class: "btn btn-default" %>
+<% if session[:perfil].include? "Administrador" %>
+  |  <%= link_to "Apagar chamado", chamado_path(@chamado.id), :method => :delete, :data => {:confirm => "Tem certeza?" } , class: 'btn btn-danger active' %>
+<% end %>

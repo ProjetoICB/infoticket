@@ -1,28 +1,6 @@
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#log').dataTable ({
-            "iDisplayLength": 15, <!-- 10 registros por pagina -->
-            "bPaginate": true,    <!-- Paginação  -->
-            "oLanguage": { <!-- Inicia a tradução dos itens da tela -->
-                "sInfo":              "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoFiltered":      "Filtrado de _MAX_ registros no total",
-                "sInfoEmpty":         "Sem resultados",
-                "sZeroRecords":       "Sem resultados",
-                "sSearch":            "Buscar",
-                "oPaginate": {
-                    "sFirst":         "Primeiro",
-                    "sPrevious":      "Anterior",
-                    "sNext":          "Próximo",
-                    "sLast":          "Ultimo"
-                }
-            }
-        })
-    })
-</script>
-
 <h1>Logs</h1>
 
-<table class="table table-bordered display" id="log">
+<table id="log" class="table table-bordered display">
   <thead>
     <tr>
       <th class="text-center">Ação</th>

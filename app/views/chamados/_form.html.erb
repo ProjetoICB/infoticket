@@ -58,6 +58,14 @@
             <% end %>
 
             <div class="control-group">
+              <%= f.label :departamento, :class => 'control-label' %>
+              <div class="controls">
+                <%= f.select :departamento, options_for_select(@departamentos, selected: f.object.departamento), include_blank: true  %>
+              </div>
+            </div>
+
+
+            <div class="control-group">
               <%= f.label :predio, :class => 'control-label' %>
               <div class="controls">
                 <%= f.select :predio, ([['ICB I'],['ICB II'],['ICB III'],['ICB IV'],['Outro']])%>

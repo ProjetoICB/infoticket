@@ -3,7 +3,7 @@ class UsuariosController < ApplicationController
 
 
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.order('nomeUsuario')
     session[:avisa] = false
   end
 

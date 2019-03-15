@@ -1,60 +1,33 @@
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#usuarios').dataTable ({
-            "iDisplayLength": 10, <!-- 10 registros por pagina -->
-             "bPaginate": true,    <!-- Paginação -->
-            "oLanguage": { <!-- Inicia a tradução dos itens da tela -->
-                "sProcessing":        "Processando...",
-                "sLengthMenu":        "Mostrar _MENU_ registros",
-                "sZeroRecords":       "Sem resultados",
-                "sInfo":              "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                "sInfoFiltered":      "Filtrado de _MAX_ registros no total",
-                "sInfoEmpty":         "Sem resultados",
-                "sSearch":            "Buscar",
-                "oPaginate": {
-                    "sFirst":         "Primeiro",
-                    "sPrevious":      "Anterior",
-                    "sNext":          "Próximo",
-                    "sLast":          "Ultimo"
-                }
-            }
-        })
-    })
-</script>
-
-
-
-
 
 
 <h1>Usuários</h1>
 
 
-    <table class="table table-bordered display" id="usuarios">
-        <thead>
-            <tr>
-                <th class="text-center">Login</th>
-                <th class="text-center">Nome </th>
-                <th class="text-center">  E-mail Principal </th>
-                <th class="text-center"> Ramal</th>
-                <th class="text-center"> Departamento</th>
-                <th></th>
-            </tr>
-        </thead>
-          <% @usuarios.each do |usuario| %>
-          <% @tv = TipoVinculo.where(usuario_id: usuario.id) %>
-          <% @tv.each do |t| %>
-                <tbody>
-                <tr>
-                    <td><%= usuario.loginUsuario %></td>
-                    <td><%= usuario.nomeUsuario %></td>
-                    <td><%= usuario.emailPrincipalUsuario %> </td>
-                    <% d= usuario.numeroTelefoneFormatado.split(":") %>
-                    <td><%= d[1].to_i %></td>
-                    <td><%= t.nomeSetor %>  </td>
-                    <td class="text-center"><%= link_to 'Mostrar', usuario, class: "btn btn-default" %></td>
-                </tr>
-            <% end %>
-      </tbody>
+<table id="usuarios" class="table table-bordered display">
+  <thead>
+  <tr>
+    <th class="text-center">Login</th>
+    <th class="text-center">Nome </th>
+    <th class="text-center">  E-mail Principal </th>
+    <th class="text-center"> Ramal</th>
+    <th class="text-center"> Departamento</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @usuarios.each do |usuario| %>
+      <% @tv = TipoVinculo.where(usuario_id: usuario.id) %>
+      <% @tv.each do |t| %>
+          <tr>
+            <td><%= usuario.loginUsuario %></td>
+            <td><%= usuario.nomeUsuario %></td>
+            <td><%= usuario.emailPrincipalUsuario %> </td>
+            <% d= usuario.numeroTelefoneFormatado.split(":") %>
+            <td><%= d[1].to_i %></td>
+            <td><%= t.nomeSetor %>  </td>
+            <td class="text-center"><%= link_to 'Mostrar', usuario, class: "btn btn-default" %></td>
+          </tr>
       <% end %>
-    </table>
+  <% end %>
+  </tbody>
+</table>
