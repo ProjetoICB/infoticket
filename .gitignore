@@ -18,4 +18,8 @@ config/database.yml
 /tmp
 
 
+# Ignore welcome_controller.rb
+app/controllers/welcome_controller.rb
+
+
 
